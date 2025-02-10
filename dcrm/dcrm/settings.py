@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from config import Config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,8 +78,12 @@ WSGI_APPLICATION = 'dcrm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': Config.ENGINE,
+        'NAME': Config.DATABASE_NAME,
+        'USER': Config.DATABASE_USER,
+        'PASSWORD': Config.DATABASE_PASSWORD,
+        'HOST': Config.DATABASE_HOST,
+        'PORT': Config.DATABASE_PORT,
     }
 }
 
