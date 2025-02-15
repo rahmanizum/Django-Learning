@@ -1,12 +1,26 @@
 {% extends "base.html" %}
-
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Welcome to DCRM</h1>
-                <p>DCRM is a Django Customer Relationship Management system.</p>
+     {% block content %}
+        <div class="col-md-6 offset-md-3">
+        {% if user.is_authenticated %}
+            <h1>Welcome, {{ user.username }}</h1>
+            <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+        {% else %}
+        <h1>Login</h1>
+        <form method="post" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="username" name="username"  required
+            />
             </div>
+            <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password" name="password" required
+            />
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
         </div>
-    </div>
+        {% endif %} 
+
 {% endblock %}
