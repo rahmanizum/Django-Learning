@@ -1,24 +1,69 @@
 {% extends "base.html" %}
      {% block content %}
-        <div class="col-md-6 offset-md-3">
         {% if user.is_authenticated %}
             <h1>Welcome, {{ user.username }}</h1>
+            {% if records %}
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h2>Your Records</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="text-nowrap">First Name</th>
+                                    <th scope="col" class="text-nowrap">Last Name</th>
+                                    <th scope="col" class="text-nowrap">Email</th>
+                                    <th scope="col" class="text-nowrap">Phone</th>
+                                    <th scope="col" class="text-nowrap">Address</th>
+                                    <th scope="col" class="text-nowrap">City</th>
+                                    <th scope="col" class="text-nowrap">State</th>
+                                    <th scope="col" class="text-nowrap">Zip Code</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for record in records %}
+                                <tr>
+                                    <td>{{ record.first_name }}</td>
+                                    <td>{{ record.last_name }}</td>
+                                    <td>{{ record.email }}</td>
+                                    <td>{{ record.phone }}</td>
+                                    <td>{{ record.address }}</td>
+                                    <td>{{ record.city }}</td>
+                                    <td>{{ record.state }}</td>
+                                    <td>{{ record.zip_code }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                <p>No records found.</p>
+            {% endif %}
+
+
         {% else %}
-        <h1>Login</h1>
-        <form method="post" action="{% url 'home' %}">
-            {% csrf_token %}
-            <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="username" name="username"  required
-            />
+        <div class="col-md-6 offset-md-3 mt-3">
+            <div class="card">
+            <div class="card-header">
+                <h1>Login</h1>
             </div>
-            <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="password" name="password" required
-            />
+            <div class="card-body">
+                <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="username" name="username" required />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="password" name="password" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+            </div>
         </div>
         {% endif %} 
 
