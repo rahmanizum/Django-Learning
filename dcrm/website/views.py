@@ -33,17 +33,17 @@ def logout_user(request):
 
 def register_user(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
+        reg_form = SignUpForm(request.POST)
+        if reg_form.is_valid():
+            reg_form.save()
+            username = reg_form.cleaned_data.get('username')
+            raw_password = reg_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             messages.success(request,'You have successfully registered')
             return redirect('home')
     else:
-        form = SignUpForm()
-        return render(request,'register.html',{'form':form})
+        reg_form = SignUpForm()
+        return render(request,'register.html',{'reg_form':reg_form})
     
-    return render(request,'register.html',{'form':form})
+    return render(request,'register.html',{'reg_form':reg_form})
