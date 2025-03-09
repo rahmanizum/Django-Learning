@@ -23,7 +23,7 @@
                             </thead>
                             <tbody>
                                 {% for record in records %}
-                                <tr>
+                                <tr onclick="window.location='{% url 'record' record.id %}';" style="cursor: pointer;">
                                     <td>{{ record.first_name }}</td>
                                     <td>{{ record.last_name }}</td>
                                     <td>{{ record.email }}</td>

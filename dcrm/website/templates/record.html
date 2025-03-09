@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h2>Customer Record</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ customer_record.first_name }} {{ customer_record.last_name }}</h5>
+            <p class="card-text"><strong>Email:</strong> {{ customer_record.email }}</p>
+            <p class="card-text"><strong>Phone:</strong> {{ customer_record.phone }}</p>
+            <p class="card-text"><strong>Address:</strong> {{ customer_record.address }}</p>
+            <p class="card-text"><strong>City:</strong> {{ customer_record.city }}</p>
+            <p class="card-text"><strong>State:</strong> {{ customer_record.state }}</p>
+            <p class="card-text"><strong>Zip Code:</strong> {{ customer_record.zip_code }}</p>
+            <p class="card-text"><small class="text-muted">Created at: {{ customer_record.created_at }}</small></p>
+        </div>
+    </div>
+    <div class="card-footer text-muted mt-5">
+        <a href="{% url 'home' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
+        <form action="{% url 'delete_record' customer_record.id %}" method="POST" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
