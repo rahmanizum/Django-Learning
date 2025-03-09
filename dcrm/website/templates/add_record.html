@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Add a Customer</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'add_record' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="city" name="city" placeholder="City" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="state" name="state" placeholder="State" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="Zip Code" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Record</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

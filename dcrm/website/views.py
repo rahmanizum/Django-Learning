@@ -56,6 +56,27 @@ def customer_record(request,pk):
         messages.error(request,'You must be logged in to view records')
         return redirect('home')
 
+def add_record(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            phone = request.POST['phone']
+            address = request.POST['address']
+            city = request.POST['city']
+            state = request.POST['state']
+            zip_code = request.POST['zip_code']
+            record = Record(first_name=first_name,last_name=last_name,email=email,phone=phone,address=address,city=city,state=state,zip_code=zip_code)
+            record.save()
+            messages.success(request, f'{record.first_name} Record  added successfully')
+            return redirect('home')
+        else:
+            return render(request,'add_record.html')
+    else:
+        messages.error(request, 'You must be logged in to add records')
+        return redirect('home')
+
 def delete_record(request , pk):
     if request.user.is_authenticated:
         record = Record.objects.get(id=pk)
